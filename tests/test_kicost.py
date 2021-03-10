@@ -36,10 +36,10 @@ def do_test_single(pattern):
                 if e.output:
                     logging.error('Output from command: ' + e.output.decode())
                 logfile = os.path.join('log_test', f + '.log')
-                if os.path.isfile(logfile):
-                    with open(logfile, 'rt') as f:
-                        msg = f.read()
-                    logging.error('Logfile: ' + msg)
+                # if os.path.isfile(logfile):
+                #     with open(logfile, 'rt') as f:
+                #         msg = f.read()
+                #     logging.error('Logfile: ' + msg)
                 fail = True
                 pass
     finally:
