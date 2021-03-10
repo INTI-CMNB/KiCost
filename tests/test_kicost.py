@@ -22,6 +22,8 @@ def do_test_single(pattern):
     fail = False
     if not os.path.isdir('result_test'):
         os.mkdir('result_test')
+    if not os.path.isdir('log_test'):
+        os.mkdir('log_test')
     try:
         for f in glob.glob(pattern):
             try:
@@ -32,7 +34,12 @@ def do_test_single(pattern):
             except subprocess.CalledProcessError as e:
                 logging.error('Failed test: '+f)
                 if e.output:
-                    logging.error('Output from command: '+e.output.decode())
+                    logging.error('Output from command: ' + e.output.decode())
+                logfile = os.path.join('log_test', f + '.log')
+                if os.path.isfile(logfile):
+                    with open(logfile, 'rt') as f:
+                        msg = f.read()
+                    logging.error('Logfile: ' + msg)
                 fail = True
                 pass
     finally:
