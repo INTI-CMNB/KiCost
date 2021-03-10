@@ -27,10 +27,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
+        pip install flake8 pytest xlsx2csv
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        sudo apt-get update
-        sudo apt-get -y install xlsx2csv
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
