@@ -1,3 +1,5 @@
+PYTHON?=python3
+
 .PHONY: clean-pyc clean-build docs clean update-rates
 
 help:
@@ -15,6 +17,8 @@ help:
 	@echo "install - install the package to the active Python's site-packages"
 	@echo "release-test test of release at https://test.pypi.org/ server"
 	@echo "update-rates - update the currency exchange rates"
+	@echo "deb - create a Debian package"
+	@echo "deb-clean - clean after making a Debian package"
 
 clean: clean-build clean-pyc clean-test
 
@@ -40,7 +44,7 @@ lint:
 	flake8 kicost tests
 
 test:
-	python setup.py test
+	$(PYTHON) setup.py test
 
 test-all:
 	tox
@@ -61,23 +65,29 @@ docs:
 	$(MAKE) -C ./docs/make singlehtml
 
 release-test: clean
-	python setup.py sdist
-	python setup.py bdist_wheel
+	$(PYTHON) setup.py sdist
+	$(PYTHON) setup.py bdist_wheel
 	twine upload --verbose --repository-url https://test.pypi.org/legacy/ dist/*
 
 release: update-rates
 	#clean
-	#python setup.py sdist upload
-	#python setup.py bdist_wheel upload
+	#$(PYTHON) setup.py sdist upload
+	#$(PYTHON) setup.py bdist_wheel upload
 	twine upload --verbose dist/*
 
 dist: update-rates clean
-	python setup.py sdist
-	python setup.py bdist_wheel
+	$(PYTHON) setup.py sdist
+	$(PYTHON) setup.py bdist_wheel
 	ls -l dist
 
 install: clean
-	python setup.py install
+	$(PYTHON) setup.py install
 
 update-rates:
-	python tools/get_rates.py > kicost/currency_converter/default_rates.py
+	$(PYTHON) tools/get_rates.py > kicost/currency_converter/default_rates.py
+
+deb: update-rates
+	DEB_BUILD_OPTIONS=nocheck fakeroot dpkg-buildpackage -uc -b
+
+deb-clean: clean
+	fakeroot debian/rules clean
