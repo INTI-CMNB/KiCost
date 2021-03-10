@@ -70,9 +70,9 @@ for eachBOM in "${BOMs[@]}" ; do
 
     if [[ ${eachBOM#*.} == "csv" ]] ; then
        echo kicost "${OPTS[@]}" -wi "$eachBOM" --debug=10 --eda csv
-       kicost "${OPTS[@]}" -wi "$eachBOM" --debug=10 --eda csv >& "${LOG_PATH}$eachBOM".log
+       ../src/kicost "${OPTS[@]}" -wi "$eachBOM" --debug=10 --eda csv >& "${LOG_PATH}$eachBOM".log
     else
-       kicost "${OPTS[@]}" -wi "$eachBOM" --debug=10 >& "${LOG_PATH}$eachBOM".log
+       ../src/kicost "${OPTS[@]}" -wi "$eachBOM" --debug=10 >& "${LOG_PATH}$eachBOM".log
     fi
     # Convert Excel to CSV file to make simple verification
     xlsx2csv --skipemptycolumns "${eachBOM%.*}.xlsx" | egrep -i -v '(USD\(| date|kicost|Total purchase)' > "${RESULT_PATH}${eachBOM%.*}.csv"

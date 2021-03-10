@@ -38,7 +38,7 @@ rm ${RESULT_PATH}*
 BOMs="part_list_small.csv Indium_X2.xml multipart.xml NF6X_TestBoard.xml StickIt-Hat.xml"
 for eachBOM in $BOMs; do
     echo "############ Testing file $eachBOM"
-    kicost -i $eachBOM -wq --inc digikey mouser
+    ../src/kicost -i $eachBOM -wq --inc digikey mouser
     # Convert Excel to CSV file to make simple verification
     xlsx2csv --skipemptycolumns "${eachBOM%.*}.xlsx" | egrep -i -v '(USD\(| date|kicost)' > "${RESULT_PATH}${eachBOM%.*}.csv"
     echo ""
