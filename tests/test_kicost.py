@@ -27,7 +27,7 @@ def do_test_single(pattern):
             try:
                 cmd = ['./test_single.sh', '--no_price', f]
                 logging.debug('Running '+str(cmd))
-                res = subprocess.check_output(['./test_single.sh', '--no_price', f], stderr=STDOUT)
+                res = subprocess.check_output(['./test_single.sh', '--no_price', f], stderr=subprocess.STDOUT)
                 logging.info(f + ' OK')
             except subprocess.CalledProcessError as e:
                 logging.error('Failed test: '+f)
