@@ -1,7 +1,7 @@
 KiCost
 ======
 
-[![image](https://img.shields.io/travis/xesscorp/kicost.svg)](https://travis-ci.org/xesscorp/kicost)
+[![image](img.shields.io/github/workflow/status/INTI-CMNB/KiCost/Python%20application)](https://github.com/INTI-CMNB/KiCost/actions)
 [![image](https://img.shields.io/pypi/v/kicost.svg)](https://pypi.python.org/pypi/kicost)
 
 KiCost is intended to be run as a script for generating part-cost
