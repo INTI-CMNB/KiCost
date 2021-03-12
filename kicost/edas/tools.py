@@ -389,7 +389,7 @@ def remove_dnp_parts(components, variant):
 
     logger.log(DEBUG_OVERVIEW, '# Removing do not populate parts...')
 
-    accepted_components = {}
+    accepted_components = OrderedDict()
     for ref, fields in components.items():
         # Remove DNPs.
         dnp = fields.get('local:dnp', fields.get('dnp', 0))
