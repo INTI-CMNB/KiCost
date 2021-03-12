@@ -212,7 +212,7 @@ def group_parts(components, fields_merge):
     # First, get groups of identical components but ignore any manufacturer's
     # part numbers that may be assigned. Just collect those in a list for each group.
     logger.log(DEBUG_OVERVIEW, 'Getting groups of identical components...')
-    component_groups = {}
+    component_groups = OrderedDict()
     for ref, fields in list(components.items()): # part references and field values.
 
         # Take the field keys and values of each part and create a hash.
@@ -792,7 +792,7 @@ def order_refs(refs, collapse=True):
 
         return num_ranges
 
-    prefix_nums = OrderedDict()  # Contains a list of numbers for each distinct prefix.
+    prefix_nums = {}  # Contains a list of numbers for each distinct prefix.
     for ref in refs:
         # Partition each part reference into its beginning part prefix and ending number.
         match = re.search(PART_REF_REGEX, ref)
