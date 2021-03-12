@@ -794,7 +794,7 @@ def order_refs(refs, collapse=True):
 
         return num_ranges
 
-    prefix_nums = {}  # Contains a list of numbers for each distinct prefix.
+    prefix_nums = OrderedDict()  # Contains a list of numbers for each distinct prefix.
     for ref in refs:
         # Partition each part reference into its beginning part prefix and ending number.
         match = re.search(PART_REF_REGEX, ref)
