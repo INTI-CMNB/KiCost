@@ -418,7 +418,8 @@ def remove_dnp_parts(components, variant):
 
         # The part was not removed, so add it to the list of accepted components.
         accepted_components[ref] = fields
-    
+    logger.log(DEBUG_OVERVIEW, 'Tools remove_dnp_parts first: '+list(accepted_components)[0])
+
     return accepted_components
 
 
@@ -492,7 +493,7 @@ def subpartqty_split(components):
     FIELDS_MANF = [d+'#' for d in distributor_dict]
     FIELDS_MANF.append('manf#')
 
-    split_components = {}
+    split_components = OrderedDict()
     for part_ref, part in components.items():
         try:
             # Divide the subparts in different parts keeping the other fields
@@ -635,6 +636,7 @@ def subpartqty_split(components):
                         pass
         except KeyError:
             continue
+    logger.log(DEBUG_OVERVIEW, 'Tools subpartqty_split first: '+list(split_components)[0])
 
     return split_components
 

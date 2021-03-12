@@ -212,5 +212,6 @@ def get_part_groups(in_file, ignore_fields, variant):
 
         # Store the fields for the part using the reference identifier as the key.
         components[str(c['ref'])] = fields
+    logger.log(DEBUG_OVERVIEW, 'KiCad get_part_groups first: '+list(components)[0])
 
     return remove_dnp_parts(components, variant), prj_info
