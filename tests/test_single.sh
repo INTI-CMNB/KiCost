@@ -77,7 +77,7 @@ for eachBOM in "${BOMs[@]}" ; do
     # Convert Excel to CSV file to make simple verification
     xlsx2csv --skipemptycolumns "${eachBOM%.*}.xlsx" | egrep -i -v '(USD\(| date|kicost|Total purchase)' > "${RESULT_PATH}${eachBOM%.*}.csv"
     # RESULT counts the number of errors (non 0 exit is error)
-    diff "${EXPECT_PATH}${eachBOM%.*}.csv" "${RESULT_PATH}${eachBOM%.*}.csv"
+    diff -u "${EXPECT_PATH}${eachBOM%.*}.csv" "${RESULT_PATH}${eachBOM%.*}.csv"
     RESULT=$(($RESULT + $?))
     echo ""
 done
